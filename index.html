@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>If… Conditionals en inglés</title>
+<title>If… Conditionals: guide and practice</title>
 <style>
 :root{
   --bg:#f6f7fb; --card:#ffffff; --ink:#1c2230; --muted:#5b6475; --line:#e3e7ef;
@@ -27,8 +27,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .wrap{max-width:820px;margin:0 auto;padding:0 16px 64px}
 header{padding:28px 0 8px}
 h1{font-size:1.9rem;line-height:1.2;margin:0 0 4px}
@@ -36,10 +35,10 @@ h1{font-size:1.9rem;line-height:1.2;margin:0 0 4px}
 nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:20px}
 nav.tabs button{flex:1;padding:10px 12px;font:inherit;font-weight:600;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;cursor:pointer}
 nav.tabs button[aria-selected="true"]{border-color:var(--accent);background:var(--accentb);color:var(--accent)}
-h2{font-size:1.4rem;margin:36px 0 10px}
-h3{font-size:1.1rem;margin:18px 0 6px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px;margin:14px 0}
-.big{font-size:1.15rem}
+h2{font-size:1.4rem;margin:0 0 10px}
+h3{font-size:1.05rem;margin:18px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
+.big{font-size:1.1rem}
 .formula{font-weight:700;font-size:1.05rem;padding:10px 14px;border-radius:10px;margin:8px 0 12px;display:inline-block}
 .ex{margin:6px 0;padding-left:12px;border-left:3px solid var(--line)}
 .ex small{display:block;color:var(--muted)}
@@ -49,34 +48,37 @@ h3{font-size:1.1rem;margin:18px 0 6px}
 .t1{border-top:6px solid var(--c1)} .t1 .formula{background:var(--c1b);color:var(--c1)} .t1 h2{color:var(--c1)}
 .t2{border-top:6px solid var(--c2)} .t2 .formula{background:var(--c2b);color:var(--c2)} .t2 h2{color:var(--c2)}
 .t3{border-top:6px solid var(--c3)} .t3 .formula{background:var(--c3b);color:var(--c3)} .t3 h2{color:var(--c3)}
-.card h2{margin-top:0}
 .if{font-weight:700;color:var(--accent)}
 table{border-collapse:collapse;width:100%;font-size:.95rem}
 th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 th{background:var(--code)}
 .tablewrap{overflow-x:auto}
-.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-weight:700;font-size:.85rem}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-weight:700;font-size:.85rem;white-space:nowrap}
 .p0{background:var(--c0b);color:var(--c0)} .p1{background:var(--c1b);color:var(--c1)}
 .p2{background:var(--c2b);color:var(--c2)} .p3{background:var(--c3b);color:var(--c3)}
 .bad{color:var(--bad)} .good{color:var(--ok)}
 button.btn{font:inherit;font-weight:600;padding:10px 16px;border-radius:12px;border:2px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
 @media (prefers-color-scheme: dark){button.btn{color:#12151d}}
 button.btn.ghost{background:transparent;color:var(--accent)}
-button.btn:disabled{opacity:.5;cursor:default}
 button.choice{display:block;width:100%;text-align:left;font:inherit;padding:12px 14px;margin:8px 0;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 button.choice:hover:not(:disabled){border-color:var(--accent)}
 button.choice.right{border-color:var(--ok);background:var(--okb)}
 button.choice.wrong{border-color:var(--bad);background:var(--badb)}
-.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
-.typebtns button{padding:14px 4px;font-weight:700}
+button.choice.picked{border-color:var(--accent);background:var(--accentb)}
+button.choice b.letter{display:inline-block;min-width:1.6em;color:var(--muted)}
+.typebtns{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}
+.typebtns button{margin:0;font-weight:700}
 .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
 .chip{font:inherit;padding:7px 14px;border-radius:99px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 .chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accentb);color:var(--accent);font-weight:700}
-.sentence{font-size:1.2rem;line-height:2.2}
+.instr{font-weight:700;margin:0 0 6px}
+.sentence{font-size:1.2rem;line-height:2.2;margin:6px 0}
+.situation{background:var(--code);border-radius:10px;padding:10px 14px;font-size:1.1rem;margin:8px 0}
 input.blank{font:inherit;font-size:1.05rem;padding:4px 8px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:11em;max-width:100%}
-input.blank:focus{outline:none;border-color:var(--accent)}
-input.blank.right{border-color:var(--ok);background:var(--okb)}
-input.blank.wrong{border-color:var(--bad);background:var(--badb)}
+input.wide{width:100%;font:inherit;font-size:1.05rem;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+input:focus{outline:none;border-color:var(--accent)}
+input.right{border-color:var(--ok)!important;background:var(--okb)!important}
+input.wrong{border-color:var(--bad)!important;background:var(--badb)!important}
 .fb{padding:12px 14px;border-radius:12px;margin:14px 0}
 .fb.ok{background:var(--okb);border:1px solid var(--ok)}
 .fb.bad{background:var(--badb);border:1px solid var(--bad)}
@@ -87,140 +89,158 @@ input.blank.wrong{border-color:var(--bad);background:var(--badb)}
 .qhead{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;margin-bottom:6px}
 a.rule{color:var(--accent);cursor:pointer;text-decoration:underline}
 .hidden{display:none}
-.flow button{margin-right:8px}
 .result{font-size:2rem;font-weight:800;margin:0}
 .muted{color:var(--muted)}
-@media (max-width:520px){ h1{font-size:1.5rem} .typebtns{grid-template-columns:repeat(2,1fr)} }
+.review{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.review p{margin:3px 0}
+label.lab{display:block;font-weight:700;margin:14px 0 4px}
+@media (max-width:520px){ h1{font-size:1.5rem} }
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <h1>🧩 If… Los conditionals en inglés</h1>
-  <p class="sub">Una guía para entenderlos y un gimnasio para practicarlos.</p>
+  <h1>🧩 If… Conditionals</h1>
+  <p class="sub">A clear guide, plus unlimited exam-style practice.</p>
 </header>
 
 <nav class="tabs" role="tablist">
-  <button role="tab" id="tab-guide" aria-selected="true" data-tab="guide">📖 Guía</button>
-  <button role="tab" id="tab-practice" aria-selected="false" data-tab="practice">✏️ Practicar</button>
+  <button role="tab" id="tab-guide" aria-selected="true" data-tab="guide">📖 Guide</button>
+  <button role="tab" id="tab-practice" aria-selected="false" data-tab="practice">✏️ Practice</button>
 </nav>
 
-<!-- ============ GUÍA ============ -->
+<!-- ============ GUIDE ============ -->
 <main id="guide">
 
 <div class="card">
-  <h2 style="margin-top:0">La idea clave</h2>
-  <p class="big">Un conditional tiene <b>dos partes</b>:</p>
-  <p class="big"><span class="if">IF + situación</span> (la condición), <b>resultado</b></p>
-  <p>Lo que decide qué tiempo verbal usar es <b>qué tan real o posible es la situación</b>. Cuanto más irreal o más lejos en el tiempo, más “retrocedemos” el verbo:</p>
+  <h2>The big idea</h2>
+  <p class="big">A conditional sentence has two parts: the <span class="if">if-clause</span> (the condition) and the <b>main clause</b> (the result).</p>
+  <p>The tense you choose shows <b>how real or possible</b> the situation is. The less real it is, the further back the verb goes.</p>
   <div class="tablewrap"><table>
-    <tr><th>¿Qué tan real es?</th><th>Tiempo después de <i>if</i></th></tr>
-    <tr><td>Siempre es verdad</td><td>Presente</td></tr>
-    <tr><td>Puede pasar (futuro real)</td><td>Presente</td></tr>
-    <tr><td>Imaginario ahora</td><td><b>Pasado simple</b></td></tr>
-    <tr><td>Imaginario en el pasado (ya no se puede cambiar)</td><td><b>Past perfect</b></td></tr>
+    <tr><th>How real is the situation?</th><th>Tense after <i>if</i></th><th>Name</th></tr>
+    <tr><td>A general fact</td><td>Present simple</td><td>Zero conditional</td></tr>
+    <tr><td>A real possibility in the future</td><td>Present simple (or present perfect)</td><td>First conditional</td></tr>
+    <tr><td>Imaginary, now or in the future</td><td><b>Past simple</b></td><td>Second conditional</td></tr>
+    <tr><td>Imaginary, in the past (too late to change)</td><td><b>Past perfect</b></td><td>Third conditional</td></tr>
   </table></div>
-  <div class="tip">💡 Por eso aparecen el pasado y el past perfect: <b>no son tiempos pasados de verdad</b>, son “tiempos de imaginación”.</div>
+  <div class="tip">💡 The past simple and the past perfect in conditionals are <b>not</b> really about the past. They are “imagination tenses”: the <b>past simple</b> imagines <i>now</i>, the <b>past perfect</b> imagines the <i>past</i>.</div>
 </div>
 
 <section class="card t0" id="tipo-0">
-  <h2>Tipo 0 · Hechos y cosas que siempre pasan</h2>
-  <div class="formula">If + presente, presente</div>
-  <div class="ex">If you heat ice, it melts.<small>Si calentás hielo, se derrite.</small></div>
-  <div class="ex">If I don't sleep, I get grumpy.</div>
-  <p>Se puede cambiar <i>if</i> por <i>whenever</i> y significa lo mismo.</p>
+  <h2>Zero conditional · facts</h2>
+  <div class="formula">If + present simple, present simple</div>
+  <div class="ex">If you heat ice, it melts.</div>
+  <div class="ex">If I don't sleep enough, I feel tired.</div>
+  <p>It describes things that are always true. You can replace <i>if</i> with <i>whenever</i> and the meaning stays the same.</p>
 </section>
 
 <section class="card t1" id="tipo-1">
-  <h2>Tipo 1 · Posibilidad real en el futuro</h2>
-  <div class="formula">If + presente, will + verbo</div>
-  <div class="ex">If it rains tomorrow, we will stay home.</div>
+  <h2>First conditional · real possibility</h2>
+  <div class="formula">If + present simple, will + base verb</div>
+  <div class="ex">If it rains tomorrow, we will postpone the picnic.</div>
   <div class="ex">If you study, you will pass the exam.</div>
-  <div class="warn">⚠️ <b>Error clásico:</b> <span class="bad">❌ If it will rain…</span> → <span class="good">✅ If it rains…</span><br>Después de <b>if</b> nunca va <b>will</b>.</div>
-  <h3>Acá aparece el present perfect</h3>
-  <p>En el tipo 1 también se puede usar <b>present perfect</b> después de <i>if</i>, para decir “cuando ya haya terminado esto”:</p>
-  <div class="ex">If you <b>have finished</b> your homework, you can play.<small>Si ya terminaste la tarea, podés jugar.</small></div>
+  <div class="warn">⚠️ <b>Classic mistake:</b> <span class="bad">❌ If it will rain…</span> → <span class="good">✅ If it rains…</span><br>Never use <b>will</b> directly after <i>if</i>.</div>
+  <h3>Where does the present perfect fit?</h3>
+  <p>In the first conditional you can use the <b>present perfect</b> after <i>if</i> to talk about something that will be <b>finished</b> before the result:</p>
+  <div class="ex">If you <b>have finished</b> your homework, you can play outside.</div>
   <div class="ex">If she <b>has left</b> already, we will call her.</div>
-  <div class="tip">Es un tipo 1 con una acción ya completada. <b>El present perfect NO es un tipo de conditional aparte.</b></div>
+  <div class="tip">The present perfect is <b>not a separate conditional</b>. It is just a first conditional where the condition is already completed.</div>
 </section>
 
 <section class="card t2" id="tipo-2">
-  <h2>Tipo 2 · Imaginario en el presente o futuro</h2>
-  <div class="formula">If + pasado simple, would + verbo</div>
-  <div class="ex">If I <b>had</b> a million dollars, I <b>would buy</b> an island.<small>No tengo el dinero.</small></div>
-  <div class="ex">If I <b>were</b> you, I <b>would</b> apologize.</div>
-  <div class="warn">⚠️ <b>Dos trampas:</b><br>
-   1. Aunque el verbo esté en pasado, <b>habla del presente o futuro</b>. No pasó nada ayer.<br>
-   2. Con <b>I / he / she / it</b> se usa <b>were</b>: <i>If I were…</i>, <i>If she were…</i> (en conversación informal también se oye <i>was</i>, pero <i>were</i> es lo correcto).</div>
+  <h2>Second conditional · imaginary now</h2>
+  <div class="formula">If + past simple, would + base verb</div>
+  <div class="ex">If I <b>had</b> a million dollars, I <b>would buy</b> an island.<small>I don't have the money.</small></div>
+  <div class="ex">If I <b>were</b> you, I <b>would</b> apologise.</div>
+  <div class="warn">⚠️ <b>Two traps:</b><br>
+   1. The verb is in the past, but it talks about the <b>present or future</b>. Nothing happened yesterday.<br>
+   2. With <b>I / he / she / it</b>, the formal form is <b>were</b>: <i>If I were…</i>, <i>If she were…</i>. (<i>Was</i> is common in everyday speech, but exams expect <i>were</i>.)</div>
 </section>
 
 <section class="card t3" id="tipo-3">
-  <h2>Tipo 3 · Imaginario en el pasado</h2>
-  <div class="formula">If + past perfect, would have + participio</div>
-  <div class="ex">If I <b>had studied</b>, I <b>would have passed</b>.<small>Pero no estudié y no aprobé.</small></div>
+  <h2>Third conditional · imaginary past</h2>
+  <div class="formula">If + past perfect, would have + past participle</div>
+  <div class="ex">If I <b>had studied</b>, I <b>would have passed</b>.<small>But I didn't study, and I didn't pass.</small></div>
   <div class="ex">If we <b>had left</b> earlier, we <b>wouldn't have missed</b> the bus.</div>
-  <p>Se usa para <b>lamentos</b> y para “qué hubiera pasado si…”. Ya no se puede cambiar.</p>
+  <p>Use it for regrets and for “what would have happened if…”. You can't change it any more.</p>
 </section>
 
 <section class="card" id="resumen">
-  <h2 style="margin-top:0">Cuadro resumen</h2>
+  <h2>Summary table</h2>
   <div class="tablewrap"><table>
-    <tr><th>Tipo</th><th>Después de IF</th><th>Resultado</th><th>Ejemplo</th></tr>
-    <tr><td><span class="pill p0">0</span> siempre</td><td>presente</td><td>presente</td><td>If you heat ice, it melts.</td></tr>
-    <tr><td><span class="pill p1">1</span> posible</td><td>presente (o present perfect)</td><td>will + verbo</td><td>If it rains, we'll stay home.</td></tr>
-    <tr><td><span class="pill p2">2</span> imaginario hoy</td><td>pasado simple</td><td>would + verbo</td><td>If I won, I'd travel.</td></tr>
-    <tr><td><span class="pill p3">3</span> imaginario pasado</td><td>past perfect</td><td>would have + participio</td><td>If I'd won, I'd have traveled.</td></tr>
+    <tr><th>Type</th><th>After IF</th><th>Result clause</th><th>Example</th></tr>
+    <tr><td><span class="pill p0">Zero</span></td><td>present simple</td><td>present simple</td><td>If you heat ice, it melts.</td></tr>
+    <tr><td><span class="pill p1">First</span></td><td>present simple (or present perfect)</td><td>will + base verb</td><td>If it rains, we'll stay home.</td></tr>
+    <tr><td><span class="pill p2">Second</span></td><td>past simple</td><td>would + base verb</td><td>If I won, I'd travel.</td></tr>
+    <tr><td><span class="pill p3">Third</span></td><td>past perfect</td><td>would have + past participle</td><td>If I'd won, I'd have travelled.</td></tr>
   </table></div>
+  <p class="muted" style="margin-bottom:0">Watch out for contractions: <i>I'd</i> can mean <i>I would</i> (in the result) or <i>I had</i> (after <i>if</i>).</p>
 </section>
 
 <section class="card" id="elegir">
-  <h2 style="margin-top:0">¿Cuál uso? Tres preguntas</h2>
-  <div class="flow" id="flow"></div>
-  <p class="muted" style="margin-bottom:0">Ojo con las contracciones: <i>I'd</i> puede ser <i>I would</i> (en el resultado) o <i>I had</i> (después de <i>if</i>).</p>
+  <h2>Which one do I use?</h2>
+  <div id="flow"></div>
+</section>
+
+<section class="card" id="clues">
+  <h2>Clues to look for in an exam</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Clue in the sentence</th><th>Probably…</th></tr>
+    <tr><td>always, whenever, every time, a scientific fact</td><td><span class="pill p0">Zero</span></td></tr>
+    <tr><td>tomorrow, tonight, next week, “I'm not sure yet”</td><td><span class="pill p1">First</span></td></tr>
+    <tr><td>“If I were you…”, an unlikely or impossible situation now</td><td><span class="pill p2">Second</span></td></tr>
+    <tr><td>yesterday, last week, last year, a regret about the past</td><td><span class="pill p3">Third</span></td></tr>
+  </table></div>
+  <div class="tip">Two-second check: after <b>if</b> you should <b>never</b> see <i>will</i>, <i>would</i> or <i>would have</i>.</div>
 </section>
 
 <section class="card" id="errores">
-  <h2 style="margin-top:0">Los 4 errores más comunes</h2>
+  <h2>The 4 most common mistakes</h2>
   <div class="tablewrap"><table>
-    <tr><th>❌ Mal</th><th>✅ Bien</th><th>Por qué</th></tr>
-    <tr><td>If I <b>will</b> see him, I'll tell him.</td><td>If I <b>see</b> him, I'll tell him.</td><td>Nunca <i>will</i> después de <i>if</i>.</td></tr>
-    <tr><td>If I <b>would</b> have money, I'd buy it.</td><td>If I <b>had</b> money, I'd buy it.</td><td>Nunca <i>would</i> después de <i>if</i>.</td></tr>
-    <tr><td>If I <b>studied</b> harder, I would have passed.</td><td>If I <b>had studied</b> harder, I would have passed.</td><td>Pasado = tipo 3, necesita past perfect.</td></tr>
-    <tr><td>If I <b>was</b> you…</td><td>If I <b>were</b> you…</td><td>Con <i>if</i> imaginario, <i>were</i>.</td></tr>
+    <tr><th>❌ Wrong</th><th>✅ Right</th><th>Why</th></tr>
+    <tr><td>If I <b>will</b> see him, I'll tell him.</td><td>If I <b>see</b> him, I'll tell him.</td><td>Never <i>will</i> after <i>if</i>.</td></tr>
+    <tr><td>If I <b>would</b> have money, I'd buy it.</td><td>If I <b>had</b> money, I'd buy it.</td><td>Never <i>would</i> after <i>if</i>.</td></tr>
+    <tr><td>If I <b>studied</b> harder, I would have passed.</td><td>If I <b>had studied</b> harder, I would have passed.</td><td>Past situation = third conditional = past perfect.</td></tr>
+    <tr><td>If I <b>was</b> you…</td><td>If I <b>were</b> you…</td><td>Imaginary <i>if</i> takes <i>were</i>.</td></tr>
   </table></div>
-  <p style="margin-bottom:0"><button class="btn" id="go-practice">Ir a practicar →</button></p>
+  <p style="margin-bottom:0"><button class="btn" id="go-practice">Go to practice →</button></p>
 </section>
 
 </main>
 
-<!-- ============ PRÁCTICA ============ -->
+<!-- ============ PRACTICE ============ -->
 <main id="practice" class="hidden">
 
 <div id="home">
   <div class="card">
-    <h2 style="margin-top:0">¿Qué querés practicar?</h2>
-    <h3>Tipo de ejercicio</h3>
-    <div class="row" id="modes"></div>
-    <h3>Tipo de conditional</h3>
+    <h2>Build your practice</h2>
+    <p class="muted" style="margin-top:0">Every question is generated on the spot, so you can keep going as long as you like.</p>
+    <label class="lab">Exercise type</label>
+    <div class="row" id="fmts"></div>
+    <label class="lab">Conditional</label>
     <div class="row" id="topics"></div>
-    <p><button class="btn" id="start">Empezar (10 preguntas)</button></p>
+    <label class="lab">Number of questions</label>
+    <div class="row" id="lens"></div>
+    <label class="lab">Mode</label>
+    <div class="row" id="modes"></div>
+    <p><button class="btn" id="start">Start</button></p>
   </div>
   <div class="card">
-    <h3 style="margin-top:0">Tu progreso</h3>
+    <h3 style="margin-top:0">Your progress</h3>
     <div class="prog" id="progress"></div>
-    <p class="muted" style="margin-bottom:0"><small>Se guarda en este navegador. <a class="rule" id="reset-progress">Borrar progreso</a></small></p>
+    <p class="muted" style="margin-bottom:0"><small>Saved in this browser. <a class="rule" id="reset-progress">Reset progress</a></small></p>
   </div>
 </div>
 
 <div id="quiz" class="hidden">
   <div class="card">
     <div class="qhead"><span id="qnum"></span><span id="qscore"></span></div>
-    <div class="bar"><i id="qbar" style="width:0;background:var(--accent)"></i></div>
+    <div class="bar" id="qbarwrap"><i id="qbar" style="width:0;background:var(--accent)"></i></div>
     <div id="qbox" style="margin-top:14px"></div>
     <div id="qfb"></div>
     <div class="row" id="qactions"></div>
   </div>
-  <p><a class="rule" id="quit">← Salir al menú</a></p>
+  <p><a class="rule" id="finish">Finish now</a> · <a class="rule" id="quit">Back to menu</a></p>
 </div>
 
 <div id="end" class="hidden"></div>
@@ -232,7 +252,7 @@ a.rule{color:var(--accent);cursor:pointer;text-decoration:underline}
 (function(){
 "use strict";
 
-/* ---------- utilidades ---------- */
+/* ================= helpers ================= */
 function h(tag, attrs){
   var e=document.createElement(tag); attrs=attrs||{};
   Object.keys(attrs).forEach(function(k){
@@ -250,9 +270,13 @@ function h(tag, attrs){
   return e;
 }
 function $(s){return document.querySelector(s)}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function sample(a,n){return shuffle(a).slice(0,n)}
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i})}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 
-/* ---------- pestañas ---------- */
+/* ================= tabs ================= */
 function showTab(name, anchor){
   ["guide","practice"].forEach(function(t){
     $("#"+t).classList.toggle("hidden", t!==name);
@@ -266,300 +290,590 @@ document.querySelectorAll("nav.tabs button").forEach(function(b){
 });
 $("#go-practice").addEventListener("click",function(){showTab("practice")});
 
-/* ---------- guía: ¿cuál uso? ---------- */
+/* ================= guide: which one? ================= */
 var FLOW={
-  q1:{q:"1) ¿Es un hecho que siempre pasa?",y:"r0",n:"q2"},
-  q2:{q:"2) ¿Puede pasar de verdad (es posible)?",y:"r1",n:"q3"},
-  q3:{q:"3) No es real. ¿Habla del pasado (algo que ya no se puede cambiar)?",y:"r3",n:"r2"}
+  q1:{q:"1) Is it a fact that is always true?",y:"r0",n:"q2"},
+  q2:{q:"2) Is it a real possibility (it could really happen)?",y:"r1",n:"q3"},
+  q3:{q:"3) It isn't real. Is it about the past (something that can't be changed now)?",y:"r3",n:"r2"}
 };
 var RES={
-  r0:["p0","Tipo 0","If + presente, presente"],
-  r1:["p1","Tipo 1","If + presente, will + verbo"],
-  r2:["p2","Tipo 2","If + pasado simple, would + verbo"],
-  r3:["p3","Tipo 3","If + past perfect, would have + participio"]
+  r0:["p0","Zero conditional","If + present simple, present simple"],
+  r1:["p1","First conditional","If + present simple, will + base verb"],
+  r2:["p2","Second conditional","If + past simple, would + base verb"],
+  r3:["p3","Third conditional","If + past perfect, would have + past participle"]
 };
 function renderFlow(step){
   var box=$("#flow"); box.replaceChildren();
   if(FLOW[step]){
     box.append(h("p",{class:"big"},FLOW[step].q),
-      h("button",{class:"btn",onclick:function(){renderFlow(FLOW[step].y)}},"Sí"),
-      h("button",{class:"btn ghost",onclick:function(){renderFlow(FLOW[step].n)}},"No"));
+      h("div",{class:"row"},
+        h("button",{class:"btn",onclick:function(){renderFlow(FLOW[step].y)}},"Yes"),
+        h("button",{class:"btn ghost",onclick:function(){renderFlow(FLOW[step].n)}},"No")));
   } else {
     var r=RES[step];
-    box.append(h("p",{class:"big"},"Usá el ",h("span",{class:"pill "+r[0]},r[1]),": ",h("b",{},r[2])),
-      h("button",{class:"btn ghost",onclick:function(){renderFlow("q1")}},"Empezar de nuevo"));
+    box.append(h("p",{class:"big"},"Use the ",h("span",{class:"pill "+r[0]},r[1]),": ",h("b",{},r[2])),
+      h("button",{class:"btn ghost",onclick:function(){renderFlow("q1")}},"Start again"));
   }
 }
 renderFlow("q1");
 
-/* ---------- banco de ejercicios ---------- */
-/* Respuestas guardadas ya "expandidas" (sin contracciones). role: if = después de IF, main = resultado */
-var FILL=[
- {t:0,text:"If you [1] (mix) red and blue, you [2] (get) purple.",b:[{r:"if",a:["mix"]},{r:"main",a:["get"]}],why:"Tipo 0 (hecho): presente en las dos partes."},
- {t:0,text:"If water [1] (reach) 100 °C, it [2] (boil).",b:[{r:"if",a:["reaches"]},{r:"main",a:["boils"]}],why:"Tipo 0 (hecho científico): presente en las dos partes. Ojo con la -s de he/she/it."},
- {t:0,text:"If I [1] (not sleep) enough, I [2] (feel) terrible.",b:[{r:"if",a:["do not sleep","don't sleep"]},{r:"main",a:["feel"]}],why:"Tipo 0 (pasa siempre): presente + presente."},
- {t:1,text:"If it [1] (rain) tomorrow, we [2] (cancel) the picnic.",b:[{r:"if",a:["rains"]},{r:"main",a:["will cancel"]}],why:"Tipo 1: después de if va presente (nunca will). El resultado lleva will."},
- {t:1,text:"If you [1] (not hurry), you [2] (miss) the bus.",b:[{r:"if",a:["do not hurry"]},{r:"main",a:["will miss"]}],why:"Tipo 1: presente después de if, will en el resultado."},
- {t:1,text:"If she [1] (study) hard, she [2] (pass) the test.",b:[{r:"if",a:["studies"]},{r:"main",a:["will pass"]}],why:"Tipo 1: study → studies (he/she/it) y will pass."},
- {t:1,text:"If you [1] (present perfect de finish) your homework, you can use your phone.",b:[{r:"if",a:["have finished"]}],why:"Tipo 1 con present perfect: have + participio, para una acción ya terminada."},
- {t:1,text:"If he [1] (present perfect de arrive), we [2] (start) the meeting.",b:[{r:"if",a:["has arrived"]},{r:"main",a:["will start"]}],why:"Tipo 1 con present perfect: has arrived (he → has)."},
- {t:2,text:"If I [1] (be) a bird, I [2] (fly) to Brazil.",b:[{r:"if",a:["were"],soft:["was"]},{r:"main",a:["would fly"]}],why:"Tipo 2 (imaginario): were después de if, would + verbo en el resultado."},
- {t:2,text:"If she [1] (have) more time, she [2] (learn) the guitar.",b:[{r:"if",a:["had"]},{r:"main",a:["would learn"]}],why:"Tipo 2: pasado simple después de if (habla del presente), would en el resultado."},
- {t:2,text:"If we [1] (live) near the sea, we [2] (swim) every day.",b:[{r:"if",a:["lived"]},{r:"main",a:["would swim"]}],why:"Tipo 2: lived (pasado simple) + would swim."},
- {t:2,text:"If I [1] (be) you, I [2] (not do) that.",b:[{r:"if",a:["were"],soft:["was"]},{r:"main",a:["would not do"]}],why:"Tipo 2: “If I were you…” es la fórmula para dar consejos."},
- {t:3,text:"If she [1] (study) more last year, she [2] (pass) the test.",b:[{r:"if",a:["had studied"]},{r:"main",a:["would have passed"]}],why:"Tipo 3 (pasado imaginario): had + participio, y would have + participio."},
- {t:3,text:"If we [1] (leave) earlier, we [2] (not miss) the bus.",b:[{r:"if",a:["had left"]},{r:"main",a:["would not have missed"]}],why:"Tipo 3: had left + wouldn't have missed."},
- {t:3,text:"If I [1] (know) the answer, I [2] (tell) you.",b:[{r:"if",a:["had known"]},{r:"main",a:["would have told"]}],why:"Tipo 3: had known + would have told. Know → known, tell → told."},
- {t:3,text:"If they [1] (play) better, they [2] (win) the game.",b:[{r:"if",a:["had played"]},{r:"main",a:["would have won"]}],why:"Tipo 3: had played + would have won."}
+/* ================= language data ================= */
+var VERBS={ /* base: [3rd person, past simple, past participle] */
+ study:["studies","studied","studied"], pass:["passes","passed","passed"], miss:["misses","missed","missed"],
+ save:["saves","saved","saved"], buy:["buys","bought","bought"], leave:["leaves","left","left"],
+ rain:["rains","rained","rained"], postpone:["postpones","postponed","postponed"], have:["has","had","had"],
+ win:["wins","won","won"], celebrate:["celebrates","celebrated","celebrated"], fail:["fails","failed","failed"],
+ eat:["eats","ate","eaten"], feel:["feels","felt","felt"], know:["knows","knew","known"], tell:["tells","told","told"],
+ play:["plays","played","played"], live:["lives","lived","lived"], swim:["swims","swam","swum"], find:["finds","found","found"],
+ take:["takes","took","taken"], speak:["speaks","spoke","spoken"], move:["moves","moved","moved"], wear:["wears","wore","worn"],
+ catch:["catches","caught","caught"], water:["waters","watered","watered"], die:["dies","died","died"], wake:["wakes","woke","woken"],
+ forget:["forgets","forgot","forgotten"], drive:["drives","drove","driven"], ask:["asks","asked","asked"],
+ practice:["practices","practiced","practiced"], improve:["improves","improved","improved"], hurry:["hurries","hurried","hurried"],
+ heat:["heats","heated","heated"], mix:["mixes","mixed","mixed"], turn:["turns","turned","turned"], reach:["reaches","reached","reached"],
+ press:["presses","pressed","pressed"], add:["adds","added","added"], spoil:["spoils","spoiled","spoiled"], get:["gets","got","got"],
+ sleep:["sleeps","slept","slept"], melt:["melts","melted","melted"], boil:["boils","boiled","boiled"], set:["sets","set","set"],
+ finish:["finishes","finished","finished"], clean:["cleans","cleaned","cleaned"], complete:["completes","completed","completed"],
+ go:["goes","went","gone"], be:["is","was","been"]
+};
+
+var PERSONS=[["I",0],["you",0],["he",1],["she",1],["we",0],["they",0]];
+var POSS={I:"my",you:"your",he:"his",she:"her",we:"our",they:"their"};
+var NAMES=[["Tom","he"],["Anna","she"],["Leo","he"],["Maria","she"],["Sam","he"],["Mia","she"]];
+var CUES={1:["tomorrow","tonight","next week"],2:[],3:["yesterday","last night","last week"]};
+
+/* clause: s = subject ("@" = the person chosen for the sentence), v = verb, r = rest, neg = negative */
+var ZERO=[
+ {c:{s:"you",v:"heat",r:"ice"},r:{s:"it",v:"melt"}},
+ {c:{s:"you",v:"mix",r:"red and blue paint"},r:{s:"it",v:"turn",r:"purple"}},
+ {c:{s:"water",v:"reach",r:"100 degrees"},r:{s:"it",v:"boil"}},
+ {c:{s:"you",v:"press",r:"this button"},r:{s:"the light",v:"turn",r:"on"}},
+ {c:{s:"you",v:"water",r:"your plants",neg:1},r:{s:"they",v:"die"}},
+ {c:{s:"you",v:"add",r:"salt to ice"},r:{s:"it",v:"melt",r:"faster"}},
+ {c:{s:"you",v:"sleep",r:"enough",neg:1},r:{s:"you",v:"feel",r:"tired"}},
+ {c:{s:"you",v:"leave",r:"milk in the sun"},r:{s:"it",v:"spoil"}},
+ {c:{s:"the sun",v:"set"},r:{s:"it",v:"get",r:"dark"}}
+];
+var SC=[
+ {c:{s:"@",v:"study",r:"hard"},r:{s:"@",v:"pass",r:"the test"},cue:1},
+ {c:{s:"@",v:"miss",r:"the bus"},r:{s:"@",v:"be",r:"late for school"},cue:1},
+ {c:{s:"@",v:"save",r:"money"},r:{s:"@",v:"buy",r:"a new bike"},cue:1},
+ {c:{s:"@",v:"hurry",neg:1},r:{s:"@",v:"miss",r:"the train"}},
+ {c:{s:"@",v:"leave",r:"{p} phone at home"},r:{s:"@",v:"miss",r:"the call"},cue:1},
+ {c:{s:"it",v:"rain"},r:{s:"we",v:"postpone",r:"the picnic"},cue:1},
+ {c:{s:"the weather",v:"be",r:"nice"},r:{s:"we",v:"have",r:"a barbecue"},cue:1},
+ {c:{s:"our team",v:"win",r:"the match"},r:{s:"we",v:"celebrate",r:"with pizza"},cue:1},
+ {c:{s:"@",v:"study",neg:1},r:{s:"@",v:"fail",r:"the exam"},cue:1},
+ {c:{s:"@",v:"eat",r:"too much candy"},r:{s:"@",v:"feel",r:"sick"},cue:1},
+ {c:{s:"@",v:"know",r:"the answer"},r:{s:"@",v:"tell",r:"the teacher"}},
+ {c:{s:"@",v:"have",r:"more time"},r:{s:"@",v:"play",r:"the guitar every day"}},
+ {c:{s:"@",v:"live",r:"near the sea"},r:{s:"@",v:"swim",r:"every day"}},
+ {c:{s:"@",v:"find",r:"a wallet"},r:{s:"@",v:"take",r:"it to the police"},cue:1},
+ {c:{s:"@",v:"be",r:"rich"},r:{s:"@",v:"buy",r:"an island"},types:[2,3]},
+ {c:{s:"@",v:"be",r:"taller"},r:{s:"@",v:"play",r:"basketball"},types:[2,3]},
+ {c:{s:"@",v:"speak",r:"French"},r:{s:"@",v:"move",r:"to Paris"},types:[2,3]},
+ {c:{s:"@",v:"wear",r:"a coat"},r:{s:"@",v:"catch",r:"a cold",neg:1},cue:1},
+ {c:{s:"@",v:"wake",r:"up early"},r:{s:"@",v:"be",r:"late for work",neg:1},cue:1},
+ {c:{s:"@",v:"forget",r:"{p} homework"},r:{s:"the teacher",v:"be",r:"angry"},cue:1},
+ {c:{s:"@",v:"drive",r:"too fast"},r:{s:"@",v:"have",r:"an accident"},cue:1},
+ {c:{s:"@",v:"ask",r:"{p} friends for help"},r:{s:"@",v:"find",r:"the answer"},cue:1},
+ {c:{s:"@",v:"practice",r:"every day"},r:{s:"@",v:"improve"}},
+ {c:{s:"@",v:"water",r:"the plants",neg:1},r:{s:"they",v:"die"},cue:1}
+];
+/* first conditional with the present perfect: the result is a fixed modal clause */
+var PP1=[
+ {c:{s:"@",v:"finish",r:"{p} homework"},r:{s:"@",v:"play",r:"outside",m:"can"}},
+ {c:{s:"@",v:"eat",r:"{p} vegetables"},r:{s:"@",v:"have",r:"dessert",m:"can"}},
+ {c:{s:"@",v:"clean",r:"{p} room"},r:{s:"@",v:"go",r:"out with friends",m:"can"}},
+ {c:{s:"@",v:"complete",r:"the form"},r:{s:"@",v:"leave",m:"can"}}
 ];
 
-var TYPEQ=[
- {t:0,s:"If you heat ice, it melts.",why:"Es un hecho que siempre pasa: presente + presente."},
- {t:0,s:"If you press this button, the light turns on.",why:"Pasa siempre que apretás el botón: presente + presente."},
- {t:0,s:"If water reaches 100 degrees, it boils.",why:"Hecho científico: presente + presente."},
- {t:1,s:"If it snows tomorrow, we will build a snowman.",why:"Es posible en el futuro: presente + will."},
- {t:1,s:"If he calls me tonight, I'll answer.",why:"Posible en el futuro: presente + will."},
- {t:1,s:"If you have finished, you can go.",why:"Es un tipo 1 con present perfect: acción terminada que permite algo ahora."},
- {t:2,s:"If I had a dog, I would call it Max.",why:"No tengo perro: imaginario ahora. Pasado simple + would."},
- {t:2,s:"If I were taller, I would play basketball.",why:"Imaginario ahora: were + would."},
- {t:2,s:"If I won the lottery, I would buy a house.",why:"Imaginario (poco probable): pasado simple + would."},
- {t:3,s:"If I had known about the test, I would have studied.",why:"Imaginario en el pasado: past perfect + would have."},
- {t:3,s:"If she hadn't missed the bus, she would have arrived on time.",why:"Pasado que no se puede cambiar: past perfect + would have."},
- {t:3,s:"If we had left earlier, we wouldn't have been late.",why:"Lamento por el pasado: past perfect + would have."}
-];
+var FORMS={0:["pres","pres"],1:["pres","will"],2:["pastsub","would"],3:["pastperf","wouldhave"]};
+var RULES={
+ 0:{name:"Zero conditional",formula:"if + present simple, present simple",
+    ifTip:"After “if” we use the present simple.",mainTip:"The result is also in the present simple, because it is a general fact.",
+    use:"It describes a fact or something that is always true."},
+ 1:{name:"First conditional",formula:"if + present simple (or present perfect), will + base verb",
+    ifTip:"After “if” we use the present simple (or the present perfect), never “will”.",mainTip:"The result uses will + base verb.",
+    use:"It describes a real possibility in the future."},
+ 2:{name:"Second conditional",formula:"if + past simple, would + base verb",
+    ifTip:"After “if” we use the past simple (and “were” for I/he/she/it), never “would”. The past form shows imagination, not past time.",mainTip:"The result uses would + base verb.",
+    use:"It describes an imaginary or unlikely situation now or in the future."},
+ 3:{name:"Third conditional",formula:"if + past perfect, would have + past participle",
+    ifTip:"After “if” we use the past perfect (had + past participle), never “would have”.",mainTip:"The result uses would have + past participle.",
+    use:"It describes an imaginary situation in the past that can't be changed."}
+};
+var GAPIF={0:["past","pastperf","will","would"],1:["past","pastperf","will","would"],2:["pastperf","will","would"],3:["pres","past","will","would"]};
+var GAPMAIN={0:["past","wouldhave","presperf"],1:["would","wouldhave","past","pastperf"],2:["will","wouldhave","pres"],3:["will","pres","past","pastperf"]};
+var RECIPES={
+ 0:{w:[["will","pres"],["would","pres"],["pastperf","pres"]]},
+ 1:{w:[["will","will"],["past","will"],["pres","wouldhave"]]},
+ 2:{w:[["would","would"],["pastsub","will"],["pastsub","wouldhave"]]},
+ 3:{w:[["past","wouldhave"],["wouldhave","wouldhave"],["pastperf","will"]]}
+};
 
-var CHOOSE=[
- {t:1,o:["If it rains, we will stay home.","If it will rain, we will stay home.","If it rains, we would stay home."],why:"Tipo 1: presente después de if (nunca will). Resultado con will."},
- {t:1,o:["If you have finished, you can go.","If you had finished, you can go.","If you would finish, you can go."],why:"Tipo 1 con present perfect: have finished. Nunca would después de if."},
- {t:1,o:["If you study, you will pass.","If you will study, you will pass.","If you studied, you will pass."],why:"Tipo 1: If + presente, will + verbo."},
- {t:2,o:["If I had money, I would buy it.","If I would have money, I would buy it.","If I have had money, I would buy it."],why:"Tipo 2: pasado simple después de if, would en el resultado."},
- {t:2,o:["If I were you, I would apologize.","If I would be you, I would apologize.","If I will be you, I would apologize."],why:"Tipo 2: after if solo pasado (were), nunca would ni will."},
- {t:2,o:["If she had more time, she would learn piano.","If she has more time, she would learn piano.","If she would have more time, she would learn piano."],why:"Tipo 2: pasado simple + would. Nunca would después de if."},
- {t:3,o:["If I had studied harder, I would have passed.","If I studied harder, I would have passed.","If I would have studied, I would have passed."],why:"Tipo 3: had + participio después de if. Nunca would después de if."},
- {t:3,o:["If we had left earlier, we wouldn't have missed the train.","If we left earlier, we wouldn't have missed the train.","If we would have left earlier, we wouldn't have missed the train."],why:"Tipo 3: past perfect + would have."},
- {t:3,o:["If I had known, I would have told you.","If I knew, I would have told you.","If I had known, I would told you."],why:"Tipo 3: had known + would have told."},
- {t:0,o:["If you heat ice, it melts.","If you heat ice, it will melted.","If you heated ice, it will melt."],why:"Tipo 0: presente + presente."}
-];
-
-/* ---------- normalización de respuestas ---------- */
-function norm(s, role){
-  s=String(s).toLowerCase().replace(/[’‘`´]/g,"'").trim().replace(/\s+/g," ");
-  s=s.replace(/\bwon't\b/g,"will not")
-     .replace(/n't\b/g," not")
-     .replace(/'ll\b/g," will")
-     .replace(/'ve\b/g," have")
-     .replace(/'d\b/g, role==="if" ? " had" : " would");
-  return s.replace(/\s+/g," ").trim();
+/* ================= building blocks ================= */
+function is3(s){return ["I","you","we","they"].indexOf(s)<0}
+function pickWho(){
+  if(Math.random()<0.3){var n=pick(NAMES);return {first:n[0],pron:n[1],third:true,poss:n[1]==="he"?"his":"her"};}
+  var p=pick(PERSONS);return {first:p[0],pron:p[0],third:!!p[1],poss:POSS[p[0]]};
 }
-function nrm(a){ return a.map(function(x){return norm(x,"main")}); }
+function inst(def,who,isCond){
+  var subj,third;
+  if(def.s==="@"){subj=isCond?who.first:who.pron;third=who.third;}
+  else{subj=def.s;third=is3(def.s);}
+  return {subj:subj,third:third,v:def.v,rest:(def.r||"").replace("{p}",who.poss),neg:!!def.neg,m:def.m||null};
+}
+/* verb group in a given form */
+function vg(c,form){
+  var F=VERBS[c.v],v=c.v,n=c.neg,th=c.third,be=(v==="be"),I=(c.subj==="I");
+  var bePres=I?"am":(th?"is":"are"), beWas=(th||I)?"was":"were";
+  switch(form){
+   case "pres": return !n ? (be?bePres:(th?F[0]:v)) : (be? bePres+" not" : (th?"does":"do")+" not "+v);
+   case "past": return !n ? (be?beWas:F[1]) : (be? beWas+" not" : "did not "+v);
+   case "pastsub": return be ? (n?"were not":"were") : vg(c,"past");
+   case "pastperf": return "had "+(n?"not ":"")+(be?"been":F[2]);
+   case "presperf": return (th?"has ":"have ")+(n?"not ":"")+(be?"been":F[2]);
+   case "will": return "will "+(n?"not ":"")+v;
+   case "would": return "would "+(n?"not ":"")+v;
+   case "wouldhave": return "would "+(n?"not ":"")+"have "+(be?"been":F[2]);
+  }
+}
+function contract(s){
+  return s.replace(/\bwill not\b/g,"won't").replace(/\bcannot\b/g,"can't")
+    .replace(/\b(do|does|did|would|had|is|are|was|were|has|have) not\b/g,"$1n't")
+    .replace(/\bI am not\b/g,"I'm not");
+}
+function ctext(c,form,cue,blank){
+  var verb = blank ? blank : (c.m ? c.m+" "+c.v : vg(c,form));
+  return c.subj+" "+verb+(c.rest?" "+c.rest:"")+(cue?" "+cue:"");
+}
+function sent(b,fi,fm,o){
+  o=o||{};
+  var a=ctext(b.c,fi,b.cue,o.ifBlank), m=ctext(b.r,fm,"",o.mainBlank);
+  var s=(b.rev&&!o.noRev)? m+" if "+a+"." : "If "+a+", "+m+".";
+  s=cap(s);
+  return o.raw? s : contract(s);
+}
+function mkBase(t,o){
+  o=o||{};
+  var sc,pp=false;
+  if(t===0) sc=pick(ZERO);
+  else if(t===1 && o.pp && Math.random()<0.3){sc=pick(PP1);pp=true;}
+  else sc=pick(SC.filter(function(s){return !s.types||s.types.indexOf(t)>=0}));
+  var who=pickWho();
+  var cues=CUES[t]||[];
+  var cue=(sc.cue && cues.length && !o.noCue)? pick(cues):"";
+  var pronounResult=(sc.r.s==="it"||sc.r.s==="they");  /* "It spoils if you…" would have no antecedent */
+  return {t:t,pp:pp,who:who,cue:cue,rev:!!o.rev&&!pronounResult&&Math.random()<0.4,
+          c:inst(sc.c,who,true),r:inst(sc.r,who,false),
+          forms:pp?["presperf","pres"]:FORMS[t]};
+}
+/* the real-life situation behind a second / third conditional */
+function reality(b,t){
+  var c=Object.assign({},b.c,{neg:!b.c.neg});
+  var rr=Object.assign({},b.r);
+  var s;
+  if(t===3){
+    rr.neg=!b.r.neg;
+    s=c.subj+" "+vg(c,"past")+(c.rest?" "+c.rest:"")+", so "+rr.subj+" "+vg(rr,"past")+(rr.rest?" "+rr.rest:"")+".";
+  } else {
+    var rt;
+    if(!b.r.neg && rr.v!=="be") rt="cannot "+rr.v;
+    else { rr.neg=!b.r.neg; rt=vg(rr,"pres"); }
+    s=c.subj+" "+vg(c,"pres")+(c.rest?" "+c.rest:"")+", so "+rr.subj+" "+rt+(rr.rest?" "+rr.rest:"")+".";
+  }
+  return contract(cap(s));
+}
 
-/* ---------- progreso ---------- */
-var KEY="conditionals_progress_v1";
+/* ================= exercise generators ================= */
+function whyText(t,gapIf,pp){
+  var r=RULES[t];
+  return r.name+": "+r.formula+". "+(gapIf===true?r.ifTip:gapIf===false?r.mainTip:r.use)+(pp?" The present perfect after “if” still belongs to the first conditional.":"");
+}
+
+/* 1. Choose the correct answer (multiple-choice gap) */
+function genGap(t){
+  var b=mkBase(t,{pp:true,rev:true}),f=b.forms;
+  var gapIf=b.pp?true:Math.random()<0.5;
+  var cl=gapIf?b.c:b.r, form=gapIf?f[0]:f[1];
+  var correct=vg(cl,form);
+  var cands=b.pp?["pastperf","will","would"]:(gapIf?GAPIF:GAPMAIN)[t];
+  var wrong=uniq(cands.map(function(x){return vg(cl,x)}).filter(function(x){return x!==correct}));
+  if(wrong.length<3) return genGap(t);
+  var opts=shuffle([correct].concat(sample(wrong,3)));
+  var q=sent(b,f[0],f[1],gapIf?{ifBlank:"______"}:{mainBlank:"______"});
+  return {kind:"gap",t:t,q:q,opts:opts.map(contract),ans:opts.indexOf(correct),
+          ansText:contract(correct),why:whyText(t,gapIf,b.pp),
+          full:sent(b,f[0],f[1])};
+}
+
+/* 2. Verb forms (type the verbs) */
+function genVerbs(t){
+  var b=mkBase(t,{pp:true,rev:true}),f=b.forms;
+  function brk(c){return "[#] ("+(c.neg?"not ":"")+c.v+")";}
+  var a=ctext(b.c,null,b.cue,brk(b.c));
+  var m=b.pp? ctext(b.r,null,"") : ctext(b.r,null,"",brk(b.r));
+  var text=b.rev? cap(m+" if "+a+".") : "If "+a+", "+m+".";
+  var n=0; text=text.replace(/\[#\]/g,function(){n++;return "["+n+"]";});
+  var ifBlank={role:"if",answers:b.pp?[vg(b.c,"presperf"),vg(b.c,"pres")]:[vg(b.c,f[0])],soft:[]};
+  if(t===2 && b.c.v==="be") ifBlank.soft=[vg(b.c,"past")];
+  var blanks=[];
+  if(b.pp) blanks=[ifBlank];
+  else {
+    var mainBlank={role:"main",answers:[vg(b.r,f[1])],soft:[]};
+    blanks=b.rev?[mainBlank,ifBlank]:[ifBlank,mainBlank];
+  }
+  var full=text.replace(/\[(\d)\] \([^)]*\)/g,function(_,k){return blanks[+k-1].answers[0];});
+  return {kind:"fill",t:t,text:text,blanks:blanks,ansText:contract(full),why:whyText(t,null,b.pp)+" "+RULES[t].ifTip+" "+(b.pp?"":RULES[t].mainTip)};
+}
+
+/* 3. Which sentence is correct? */
+function genChoose(t){
+  var b=mkBase(t,{rev:true}),f=FORMS[t];
+  var good=sent(b,f[0],f[1]);
+  var bad=RECIPES[t].w.map(function(w){return sent(b,w[0],w[1]);});
+  bad=uniq(bad).filter(function(x){return x!==good});
+  if(bad.length<3) return genChoose(t);
+  var opts=shuffle([good].concat(bad));
+  return {kind:"choose",t:t,opts:opts,ans:opts.indexOf(good),ansText:good,why:whyText(t)+" "+RULES[t].ifTip+" "+RULES[t].mainTip};
+}
+
+/* 4. Situation → which sentence matches? (second / third) */
+function genSituation(t){
+  var b=mkBase(t,{noCue:true}); b.rev=false;
+  var good=sent(b,FORMS[t][0],FORMS[t][1]);
+  var b2=Object.assign({},b,{r:Object.assign({},b.r,{neg:!b.r.neg})});
+  var other=(t===3)?2:3;
+  var bad=[sent(b,FORMS[other][0],FORMS[other][1]),sent(b,FORMS[1][0],FORMS[1][1]),sent(b2,FORMS[t][0],FORMS[t][1])];
+  var opts=shuffle([good].concat(bad));
+  return {kind:"situation",t:t,sit:reality(b,t),opts:opts,ans:opts.indexOf(good),ansText:good,
+          why:(t===3?"The situation is about the past and can't be changed, so we need the third conditional. ":"The situation is about now and is not what we want, so we imagine it with the second conditional. ")+RULES[t].formula+". The meaning of the result must also match the situation."};
+}
+
+/* 5. Rewrite the situation as a conditional (typed) */
+function normSentence(s){
+  s=String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/[.!?]+\s*$/,"").trim().replace(/\s+/g," ");
+  s=s.replace(/\bwon't\b/g,"will not").replace(/\bcan't\b/g,"cannot").replace(/n't\b/g," not")
+     .replace(/'ll\b/g," will").replace(/'ve\b/g," have").replace(/'m\b/g," am").replace(/'re\b/g," are");
+  s=s.replace(/'d have\b/g," would have");
+  var mi=s.search(/\bif\b/);
+  if(mi>=0){
+    var end=s.indexOf(",",mi); if(end<0) end=s.length;
+    s=s.slice(0,mi).replace(/'d\b/g," would")+s.slice(mi,end).replace(/'d\b/g," had")+s.slice(end).replace(/'d\b/g," would");
+  } else s=s.replace(/'d\b/g," would");
+  return s.replace(/,/g,"").replace(/\s+/g," ").trim();
+}
+function genRewrite(t){
+  var b=mkBase(t,{noCue:true}); b.rev=false;
+  var f=FORMS[t];
+  var raw1=sent(b,f[0],f[1],{raw:true,noRev:true});
+  var raw2=sent(Object.assign({},b,{rev:true}),f[0],f[1],{raw:true});
+  var ifs=[vg(b.c,f[0])];
+  if(t===2 && b.c.v==="be") ifs.push(vg(b.c,"past"));
+  return {kind:"rewrite",t:t,sit:reality(b,t),
+          canon:[normSentence(raw1),normSentence(raw2)],
+          ifVgs:ifs.map(normSentence),mainVg:normSentence(vg(b.r,f[1])),
+          ansText:contract(raw1),why:whyText(t)+" "+RULES[t].ifTip+" "+RULES[t].mainTip};
+}
+function gradeRewrite(it,input){
+  var n=normSentence(input);
+  if(it.canon.indexOf(n)>=0) return {ok:true,exact:true};
+  var ifPos=n.search(/\bif\b/);
+  if(ifPos<0) return {ok:false};
+  var hasMain=n.indexOf(it.mainVg)>=0;
+  var hasIf=it.ifVgs.some(function(x){return n.indexOf(x)>ifPos;});
+  return {ok:hasMain&&hasIf,exact:false};
+}
+
+/* 6. Name the conditional */
+function genType(t){
+  var b=mkBase(t,{pp:true,rev:true}),f=b.forms;
+  return {kind:"type",t:t,q:sent(b,f[0],f[1]),ansText:RULES[t].name,why:whyText(t,null,b.pp)+" "+RULES[t].use};
+}
+
+var GEN={gap:genGap,fill:genVerbs,choose:genChoose,situation:genSituation,rewrite:genRewrite,type:genType};
+var HEAD={
+ gap:"Choose the correct answer.",
+ fill:"Complete the sentence with the correct form of the verbs in brackets.",
+ choose:"Which sentence is correct?",
+ situation:"Read the situation. Which sentence matches it?",
+ rewrite:"Read the situation. Write one conditional sentence that means the same.",
+ type:"Which type of conditional is this sentence?"
+};
+
+/* ================= progress ================= */
+var KEY="conditionals_progress_v2";
 function loadP(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
 function saveP(p){try{localStorage.setItem(KEY,JSON.stringify(p))}catch(e){}}
 var COLORS=["var(--c0)","var(--c1)","var(--c2)","var(--c3)"];
+var TNAME=["Zero","First","Second","Third"];
 function renderProgress(){
-  var p=loadP(), box=$("#progress"); box.replaceChildren();
+  var p=loadP(),box=$("#progress");box.replaceChildren();
   for(var t=0;t<4;t++){
-    var d=p[t]||{ok:0,n:0}, pct=d.n? Math.round(100*d.ok/d.n):0;
-    box.append(
-      h("span",{class:"pill p"+t},"Tipo "+t),
+    var d=p[t]||{ok:0,n:0},pct=d.n?Math.round(100*d.ok/d.n):0;
+    box.append(h("span",{class:"pill p"+t},TNAME[t]),
       h("div",{class:"bar"},h("i",{style:"width:"+pct+"%;background:"+COLORS[t]})),
-      h("span",{class:"muted"},d.n? (d.ok+"/"+d.n+" ("+pct+"%)") : "sin datos")
-    );
+      h("span",{class:"muted"},d.n?(d.ok+"/"+d.n+" ("+pct+"%)"):"no data yet"));
   }
 }
+function weakest(){
+  var p=loadP(),best=[],bv=2;
+  for(var t=0;t<4;t++){var d=p[t]||{ok:0,n:0};var v=d.n?d.ok/d.n:-1;if(v<bv){bv=v;best=[t];}else if(v===bv)best.push(t);}
+  return pick(best);
+}
 $("#reset-progress").addEventListener("click",function(){
-  if(confirm("¿Borrar todo el progreso guardado?")){ saveP({}); renderProgress(); }
+  if(confirm("Reset all saved progress?")){saveP({});renderProgress();}
 });
 
-/* ---------- selector del menú ---------- */
-var MODES=[["mix","🎲 Mezcla"],["fill","✍️ Completar"],["type","🔎 ¿Qué tipo es?"],["choose","✅ Elegí la correcta"]];
-var TOPICS=[["all","Todos"],[0,"Tipo 0"],[1,"Tipo 1"],[2,"Tipo 2"],[3,"Tipo 3"]];
-var sel={mode:"mix",topic:"all"};
+/* ================= menu ================= */
+var FMTS=[["mix","Mixed test"],["gap","Choose the answer"],["fill","Verb forms"],["choose","Which sentence is correct?"],["situation","Situations"],["rewrite","Rewrite"],["type","Name the conditional"]];
+var TOPICS=[["all","All"],[0,"Zero"],[1,"First"],[2,"Second"],[3,"Third"],["weak","My weakest"]];
+var LENS=[[10,"10"],[20,"20"],[Infinity,"Endless"]];
+var MODES=[["practice","Practice (instant feedback)"],["exam","Exam (results at the end)"]];
+var sel={fmt:"mix",topic:"all",len:10,mode:"practice"};
 function renderChips(){
-  [["#modes",MODES,"mode"],["#topics",TOPICS,"topic"]].forEach(function(cfg){
-    var box=$(cfg[0]); box.replaceChildren();
+  [["#fmts",FMTS,"fmt"],["#topics",TOPICS,"topic"],["#lens",LENS,"len"],["#modes",MODES,"mode"]].forEach(function(cfg){
+    var box=$(cfg[0]);box.replaceChildren();
     cfg[1].forEach(function(o){
-      box.append(h("button",{class:"chip","aria-pressed":String(sel[cfg[2]]===o[0]),onclick:function(){sel[cfg[2]]=o[0];renderChips()}},o[1]));
+      box.append(h("button",{class:"chip","aria-pressed":String(sel[cfg[2]]===o[0]),onclick:function(){sel[cfg[2]]=o[0];renderChips();}},o[1]));
     });
   });
 }
 
-/* ---------- quiz ---------- */
+/* ================= quiz engine ================= */
 var S=null;
-function buildQueue(){
-  var pool=[];
-  function add(arr,kind){ arr.forEach(function(q){ if(sel.topic==="all"||q.t===sel.topic) pool.push(Object.assign({kind:kind},q)); }); }
-  if(sel.mode==="fill"||sel.mode==="mix") add(FILL,"fill");
-  if(sel.mode==="type"||sel.mode==="mix") add(TYPEQ,"type");
-  if(sel.mode==="choose"||sel.mode==="mix") add(CHOOSE,"choose");
-  return shuffle(pool).slice(0,10);
+function pickType(){
+  if(S.topic==="all") return Math.floor(Math.random()*4);
+  if(S.topic==="weak") return weakest();
+  return S.topic;
 }
-function startQuiz(queue){
-  S={queue:queue,i:0,score:0,results:[]};
-  $("#home").classList.add("hidden"); $("#end").classList.add("hidden"); $("#quiz").classList.remove("hidden");
+function genItem(){
+  var t=pickType(),fmt=S.fmt;
+  if((fmt==="situation"||fmt==="rewrite")&&t<2) t=pick([2,3]);
+  if(fmt==="mix"){
+    var pool=["gap","gap","gap","fill","fill","fill","choose","choose","type","type"];
+    if(t>=2) pool=pool.concat(["situation","situation","rewrite","rewrite"]);
+    fmt=pick(pool);
+  }
+  return GEN[fmt](t);
+}
+function getItem(i){while(S.items.length<=i)S.items.push(genItem());return S.items[i];}
+
+function startQuiz(opts){
+  S={fmt:opts.fmt,topic:opts.topic,exam:opts.mode==="exam",n:opts.len,items:opts.items||[],i:0,score:0,results:[]};
+  if(opts.items) S.n=opts.items.length;
+  $("#home").classList.add("hidden");$("#end").classList.add("hidden");$("#quiz").classList.remove("hidden");
   window.scrollTo({top:0});
   renderQ();
 }
 $("#start").addEventListener("click",function(){
-  var q=buildQueue();
-  if(!q.length){ alert("No hay ejercicios de ese tipo con esa combinación. Probá con otra."); return; }
-  startQuiz(q);
+  if((sel.fmt==="situation"||sel.fmt==="rewrite")&&(sel.topic===0||sel.topic===1)){
+    alert("Situations and Rewrite only cover the Second and Third conditional. Pick another conditional or another exercise type.");return;
+  }
+  startQuiz(sel);
 });
-$("#quit").addEventListener("click",function(){ goHome(); });
 function goHome(){
-  $("#quiz").classList.add("hidden"); $("#end").classList.add("hidden"); $("#home").classList.remove("hidden");
+  $("#quiz").classList.add("hidden");$("#end").classList.add("hidden");$("#home").classList.remove("hidden");
   renderProgress();
 }
+$("#quit").addEventListener("click",goHome);
+$("#finish").addEventListener("click",function(){ if(S.results.length) showEnd(); else goHome(); });
 
-function record(q,ok){
-  var p=loadP(), d=p[q.t]||{ok:0,n:0}; d.n++; if(ok) d.ok++; p[q.t]=d; saveP(p);
-  if(ok) S.score++;
-  S.results.push({q:q,ok:ok});
+function record(it,ok,user){
+  var p=loadP(),d=p[it.t]||{ok:0,n:0};d.n++;if(ok)d.ok++;p[it.t]=d;saveP(p);
+  if(ok)S.score++;
+  S.results.push({item:it,ok:ok,user:user});
   $("#qscore").textContent="✔ "+S.score+" / "+S.results.length;
 }
 function ruleLink(t){
-  return h("a",{class:"rule",onclick:function(){showTab("guide","tipo-"+t)}},"Ver la regla del tipo "+t);
+  return h("a",{class:"rule",onclick:function(){showTab("guide","tipo-"+t);}},"Review the "+RULES[t].name.toLowerCase()+" in the guide");
 }
-function feedback(ok,q,extra){
-  var fb=$("#qfb"); fb.replaceChildren();
+function advance(){S.i++;if(S.i>=S.n)showEnd();else renderQ();}
+function submit(it,ok,user,extra){
+  record(it,ok,user);
+  if(S.exam){advance();return;}
+  var fb=$("#qfb");fb.replaceChildren();
   fb.append(h("div",{class:"fb "+(ok?"ok":"bad")},
-    h("p",{},h("b",{},ok?"✅ ¡Correcto!":"❌ Casi…")),
+    h("p",{},h("b",{},ok?"✅ Correct!":"❌ Not quite.")),
+    ok?null:h("p",{},"Correct answer: ",h("b",{},it.ansText)),
     extra||null,
-    h("p",{},q.why),
-    h("p",{},ruleLink(q.t))
-  ));
+    h("p",{},it.why),
+    h("p",{},ruleLink(it.t))));
+  var last=(S.i>=S.n-1);
+  var box=$("#qactions");box.replaceChildren();
+  var b=h("button",{class:"btn",onclick:advance},last?"See results":"Next →");
+  box.append(b);b.focus();
 }
-function nextBtn(){
-  var box=$("#qactions"); box.replaceChildren();
-  var last=S.i>=S.queue.length-1;
-  var b=h("button",{class:"btn",onclick:function(){ if(last) showEnd(); else {S.i++;renderQ();} }},last?"Ver resultado":"Siguiente →");
-  box.append(b); b.focus();
-}
-function fullSentence(q){
-  return q.text.replace(/\[(\d)\]/g,function(_,n){ return q.b[+n-1].a[0]; }).replace(/\s*\([^)]*\)/g,"");
-}
-function renderQ(){
-  var q=S.queue[S.i];
-  $("#qnum").textContent="Pregunta "+(S.i+1)+" de "+S.queue.length;
-  $("#qbar").style.width=(100*S.i/S.queue.length)+"%";
-  $("#qscore").textContent="✔ "+S.score+" / "+S.results.length;
-  $("#qfb").replaceChildren(); $("#qactions").replaceChildren();
-  var box=$("#qbox"); box.replaceChildren();
-  var tag=h("span",{class:"pill p"+q.t},"Tipo "+q.t);
 
-  if(q.kind==="fill"){
-    box.append(h("p",{class:"muted"},tag," Completá con la forma correcta del verbo:"));
-    var line=h("p",{class:"sentence"}), inputs=[];
-    q.text.split(/(\[\d\])/).forEach(function(part){
-      var m=part.match(/^\[(\d)\]$/);
-      if(m){
-        var inp=h("input",{type:"text",class:"blank",autocapitalize:"off",autocomplete:"off",spellcheck:"false","aria-label":"respuesta "+m[1]});
-        inputs.push(inp); line.append(inp);
-      } else line.append(part);
-    });
-    box.append(line);
-    var done=false;
-    function check(){
-      if(done) return; done=true;
-      var allOk=true, notes=[];
-      q.b.forEach(function(b,k){
-        var v=norm(inputs[k].value,b.r);
-        var ok=b.a.map(function(x){return norm(x,b.r)}).indexOf(v)>=0;
-        if(!ok && b.soft && b.soft.indexOf(v)>=0) notes.push("“was” se oye mucho, pero en el colegio se pide “were” después de if.");
-        inputs[k].classList.add(ok?"right":"wrong"); inputs[k].disabled=true;
-        if(!ok) allOk=false;
-      });
-      record(q,allOk);
-      var extra=[];
-      if(!allOk) extra.push(h("p",{},"Respuesta: ",h("b",{},fullSentence(q))));
-      notes.forEach(function(n){extra.push(h("p",{},"💬 "+n))});
-      feedback(allOk,q,extra);
-      nextBtn();
-    }
-    inputs.forEach(function(inp,k){
-      inp.addEventListener("keydown",function(e){
-        if(e.key==="Enter"){ e.preventDefault(); if(k<inputs.length-1) inputs[k+1].focus(); else check(); }
-      });
-    });
-    $("#qactions").append(h("button",{class:"btn",onclick:check},"Comprobar"));
-    inputs[0].focus();
-    box.append(h("p",{class:"muted"},h("small",{},"Escribí la forma completa (por ejemplo “would have gone”). Las contracciones como don't o I'll también valen.")));
+function choiceList(it,onPick){
+  var wrap=h("div"),locked=false,letters="ABCD";
+  it.opts.forEach(function(text,idx){
+    var btn=h("button",{class:"choice","data-i":idx,onclick:function(){
+      if(locked)return;locked=true;
+      var ok=(idx===it.ans);
+      wrap.querySelectorAll("button").forEach(function(x){x.disabled=true;});
+      if(S.exam) btn.classList.add("picked");
+      else{
+        wrap.querySelectorAll("button").forEach(function(x){if(+x.dataset.i===it.ans)x.classList.add("right");});
+        if(!ok)btn.classList.add("wrong");
+      }
+      onPick(ok,text);
+    }},h("b",{class:"letter"},letters[idx]+")")," "+text);
+    wrap.append(btn);
+  });
+  return wrap;
+}
+
+function renderQ(){
+  var it=getItem(S.i);
+  $("#qnum").textContent=isFinite(S.n)?("Question "+(S.i+1)+" of "+S.n):("Question "+(S.i+1));
+  $("#qbarwrap").style.display=isFinite(S.n)?"":"none";
+  $("#qbar").style.width=(isFinite(S.n)?100*S.i/S.n:0)+"%";
+  $("#qscore").textContent=S.exam?"":("✔ "+S.score+" / "+S.results.length);
+  $("#qfb").replaceChildren();$("#qactions").replaceChildren();
+  var box=$("#qbox");box.replaceChildren();
+  box.append(h("p",{class:"instr"},HEAD[it.kind]));
+
+  if(it.kind==="gap"){
+    box.append(h("p",{class:"sentence",style:"line-height:1.6"},it.q));
+    box.append(choiceList(it,function(ok,text){submit(it,ok,text);}));
   }
 
-  if(q.kind==="type"){
-    box.append(h("p",{class:"muted"},"¿Qué tipo de conditional es?"));
-    box.append(h("p",{class:"sentence",style:"line-height:1.5"},"“"+q.s+"”"));
-    var tb=h("div",{class:"typebtns"}), locked=false;
+  if(it.kind==="choose"){
+    box.append(choiceList(it,function(ok,text){submit(it,ok,text);}));
+  }
+
+  if(it.kind==="situation"){
+    box.append(h("div",{class:"situation"},it.sit));
+    box.append(choiceList(it,function(ok,text){submit(it,ok,text);}));
+  }
+
+  if(it.kind==="type"){
+    box.append(h("p",{class:"sentence",style:"line-height:1.5"},"“"+it.q+"”"));
+    var tb=h("div",{class:"typebtns"}),locked=false;
     [0,1,2,3].forEach(function(t){
       var btn=h("button",{class:"choice","data-t":t,onclick:function(){
-        if(locked) return; locked=true;
-        var ok=(t===q.t);
-        tb.querySelectorAll("button").forEach(function(x){
-          x.disabled=true;
-          if(+x.dataset.t===q.t) x.classList.add("right");
-        });
-        if(!ok) btn.classList.add("wrong");
-        record(q,ok);
-        feedback(ok,q,ok?null:h("p",{},"Era el ",h("b",{},"tipo "+q.t),"."));
-        nextBtn();
-      }},"Tipo "+t);
+        if(locked)return;locked=true;
+        var ok=(t===it.t);
+        tb.querySelectorAll("button").forEach(function(x){x.disabled=true;});
+        if(S.exam)btn.classList.add("picked");
+        else{
+          tb.querySelectorAll("button").forEach(function(x){if(+x.dataset.t===it.t)x.classList.add("right");});
+          if(!ok)btn.classList.add("wrong");
+        }
+        submit(it,ok,RULES[t].name);
+      }},RULES[t].name);
       tb.append(btn);
     });
     box.append(tb);
   }
 
-  if(q.kind==="choose"){
-    box.append(h("p",{class:"muted"},tag," Elegí la oración correcta:"));
-    var order=shuffle([0,1,2]), locked2=false, wrap=h("div");
-    order.forEach(function(idx){
-      var btn=h("button",{class:"choice","data-i":idx,onclick:function(){
-        if(locked2) return; locked2=true;
-        var ok=(idx===0);
-        wrap.querySelectorAll("button").forEach(function(x){
-          x.disabled=true;
-          if(+x.dataset.i===0) x.classList.add("right");
-        });
-        if(!ok) btn.classList.add("wrong");
-        record(q,ok);
-        feedback(ok,q);
-        nextBtn();
-      }},q.o[idx]);
-      wrap.append(btn);
+  if(it.kind==="fill"){
+    var line=h("p",{class:"sentence"}),inputs=[];
+    it.text.split(/(\[\d\])/).forEach(function(part){
+      var m=part.match(/^\[(\d)\]$/);
+      if(m){var inp=h("input",{type:"text",class:"blank",autocapitalize:"off",autocomplete:"off",spellcheck:"false","aria-label":"answer "+m[1]});inputs.push(inp);line.append(inp);}
+      else line.append(part);
     });
-    box.append(wrap);
+    box.append(line);
+    var done=false;
+    function check(){
+      if(done)return;done=true;
+      var allOk=true,notes=[];
+      it.blanks.forEach(function(bl,k){
+        var v=normAnswer(inputs[k].value,bl.role);
+        var ok=bl.answers.some(function(a){return normAnswer(a,bl.role)===v;});
+        if(!ok&&bl.soft.some(function(a){return normAnswer(a,bl.role)===v;}))notes.push(h("p",{},"💬 “was” is common in everyday speech, but exams expect “were” after “if”."));
+        if(!S.exam){inputs[k].classList.add(ok?"right":"wrong");}
+        inputs[k].disabled=true;
+        if(!ok)allOk=false;
+      });
+      submit(it,allOk,inputs.map(function(i){return i.value;}).join(" / "),notes);
+    }
+    inputs.forEach(function(inp,k){
+      inp.addEventListener("keydown",function(e){
+        if(e.key==="Enter"){e.preventDefault();if(k<inputs.length-1)inputs[k+1].focus();else check();}
+      });
+    });
+    $("#qactions").append(h("button",{class:"btn",onclick:check},S.exam?"Next →":"Check"));
+    inputs[0].focus();
+    box.append(h("p",{class:"muted"},h("small",{},"Write the full verb form, for example “would have gone”. Contractions such as don't or I'll are fine.")));
+  }
+
+  if(it.kind==="rewrite"){
+    box.append(h("div",{class:"situation"},it.sit));
+    var inp2=h("input",{type:"text",class:"wide",placeholder:"If …",autocapitalize:"off",autocomplete:"off",spellcheck:"false","aria-label":"your sentence"});
+    box.append(inp2);
+    var done2=false;
+    function check2(){
+      if(done2)return;done2=true;
+      var g=gradeRewrite(it,inp2.value);
+      inp2.disabled=true;
+      if(!S.exam)inp2.classList.add(g.ok?"right":"wrong");
+      var extra=(g.ok&&!g.exact)?h("p",{},"💬 Your wording is a bit different from the model answer, but the tenses are right. Model answer: ",h("b",{},it.ansText)):null;
+      if(!g.ok&&!S.exam)extra=h("p",{class:"muted"},"Other wording can also be correct, as long as the tenses match the rule.");
+      submit(it,g.ok,inp2.value,extra);
+    }
+    inp2.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();check2();}});
+    $("#qactions").append(h("button",{class:"btn",onclick:check2},S.exam?"Next →":"Check"));
+    inp2.focus();
   }
 }
+function normAnswer(s,role){
+  s=String(s).toLowerCase().replace(/[’‘`´]/g,"'").trim().replace(/\s+/g," ");
+  s=s.replace(/\bwon't\b/g,"will not").replace(/n't\b/g," not").replace(/'ll\b/g," will").replace(/'ve\b/g," have")
+     .replace(/'d\b/g,role==="if"?" had":" would");
+  return s.replace(/\s+/g," ").trim();
+}
 
+/* ================= results ================= */
+function itemQuestionText(it){
+  if(it.kind==="fill") return it.text;
+  if(it.kind==="gap") return it.q;
+  if(it.kind==="type") return "“"+it.q+"”";
+  if(it.kind==="situation"||it.kind==="rewrite") return it.sit;
+  return "Which sentence is correct?";
+}
 function showEnd(){
   $("#quiz").classList.add("hidden");
-  var end=$("#end"); end.classList.remove("hidden"); end.replaceChildren();
-  var n=S.results.length, pct=Math.round(100*S.score/n);
-  var msg= pct===100 ? "¡Perfecto! 🏆" : pct>=80 ? "¡Muy bien! 🎉" : pct>=60 ? "Vas bien, un repaso y sale 💪" : "Ojo con las reglas: repasá la guía y probá de nuevo 📖";
+  var end=$("#end");end.classList.remove("hidden");end.replaceChildren();
+  var n=S.results.length;
+  if(!n){goHome();return;}
+  var pct=Math.round(100*S.score/n);
+  var msg=pct===100?"Perfect! 🏆":pct>=80?"Great job! 🎉":pct>=60?"Good, a little more review and you've got it 💪":"Review the guide and try again 📖";
   var by=[0,1,2,3].map(function(t){
-    var r=S.results.filter(function(x){return x.q.t===t});
-    if(!r.length) return null;
-    var ok=r.filter(function(x){return x.ok}).length;
-    return h("p",{},h("span",{class:"pill p"+t},"Tipo "+t)," "+ok+" de "+r.length);
+    var r=S.results.filter(function(x){return x.item.t===t;});
+    if(!r.length)return null;
+    var ok=r.filter(function(x){return x.ok;}).length;
+    return h("p",{},h("span",{class:"pill p"+t},TNAME[t])," "+ok+" of "+r.length);
   });
-  var failed=S.results.filter(function(x){return !x.ok}).map(function(x){return x.q});
+  var failed=S.results.filter(function(x){return !x.ok;});
+  var rev=failed.map(function(x){
+    var it=x.item;
+    return h("div",{class:"review"},
+      h("p",{},h("span",{class:"pill p"+it.t},TNAME[it.t])," ",h("b",{},HEAD[it.kind])),
+      h("p",{},itemQuestionText(it)),
+      h("p",{class:"bad"},"Your answer: "+(x.user||"(blank)")),
+      h("p",{class:"good"},"Correct answer: "+it.ansText),
+      h("p",{class:"muted"},it.why));
+  });
   var card=h("div",{class:"card"},
-    h("p",{class:"result"},S.score+" / "+n),
+    h("p",{class:"result"},S.score+" / "+n+" ("+pct+"%)"),
     h("p",{class:"big"},msg),
     h("div",{},by),
     h("div",{class:"row"},
-      failed.length? h("button",{class:"btn",onclick:function(){startQuiz(shuffle(failed))}},"Repasar lo que fallé ("+failed.length+")") : null,
-      h("button",{class:"btn "+(failed.length?"ghost":""),onclick:function(){var q=buildQueue(); if(q.length) startQuiz(q); else goHome();}},"Otra ronda"),
-      h("button",{class:"btn ghost",onclick:goHome},"Menú"),
-      h("button",{class:"btn ghost",onclick:function(){showTab("guide")}},"📖 Guía")
-    )
-  );
+      failed.length?h("button",{class:"btn",onclick:function(){
+        startQuiz({fmt:S.fmt,topic:S.topic,mode:S.exam?"exam":"practice",len:failed.length,items:shuffle(failed.map(function(x){return x.item;}))});
+      }},"Retry my mistakes ("+failed.length+")"):null,
+      h("button",{class:"btn "+(failed.length?"ghost":""),onclick:function(){startQuiz(sel);}},"New round"),
+      h("button",{class:"btn ghost",onclick:goHome},"Menu"),
+      h("button",{class:"btn ghost",onclick:function(){showTab("guide");}},"📖 Guide")));
   end.append(card);
+  if(rev.length) end.append(h("div",{class:"card"},h("h3",{style:"margin-top:0"},"Review your mistakes"),rev));
   window.scrollTo({top:0});
 }
 
-renderChips(); renderProgress();
+renderChips();renderProgress();
 })();
 </script>
 </body>
