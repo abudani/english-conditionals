@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>If… Conditionals: guide and practice</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <style>
 :root{
   --bg:#f6f7fb; --card:#ffffff; --ink:#1c2230; --muted:#5b6475; --line:#e3e7ef;
@@ -95,6 +96,13 @@ a.rule{color:var(--accent);cursor:pointer;text-decoration:underline}
 .review p{margin:3px 0}
 label.lab{display:block;font-weight:700;margin:14px 0 4px}
 @media (max-width:520px){ h1{font-size:1.5rem} }
+#printReport{display:none}
+@media print{
+  body.printing .wrap{display:none}
+  body.printing #printReport{display:block;padding:12px;color:#000;background:#fff;font:12pt/1.4 system-ui,sans-serif}
+  body.printing #printReport .ok{color:#15803d} body.printing #printReport .no{color:#b91c1c}
+  body.printing #printReport p{margin:2px 0}
+}
 </style>
 </head>
 <body>
@@ -221,6 +229,10 @@ label.lab{display:block;font-weight:700;margin:14px 0 4px}
     <div class="row" id="topics"></div>
     <label class="lab">Number of questions</label>
     <div class="row" id="lens"></div>
+    <div id="customwrap" class="hidden">
+      <label for="customn" class="muted">How many questions? (1 to 200)</label>
+      <input id="customn" class="wide" type="number" min="1" max="200" value="15" inputmode="numeric" style="max-width:10em">
+    </div>
     <label class="lab">Mode</label>
     <div class="row" id="modes"></div>
     <p><button class="btn" id="start">Start</button></p>
@@ -628,9 +640,14 @@ $("#reset-progress").addEventListener("click",function(){
 /* ================= menu ================= */
 var FMTS=[["mix","Mixed test"],["gap","Choose the answer"],["fill","Verb forms"],["choose","Which sentence is correct?"],["situation","Situations"],["rewrite","Rewrite"],["type","Name the conditional"]];
 var TOPICS=[["all","All"],[0,"Zero"],[1,"First"],[2,"Second"],[3,"Third"],["weak","My weakest"]];
-var LENS=[[10,"10"],[20,"20"],[Infinity,"Endless"]];
+var LENS=[[10,"10"],[20,"20"],["custom","Choose a number"],[Infinity,"Endless"]];
 var MODES=[["practice","Practice (instant feedback)"],["exam","Exam (results at the end)"]];
 var sel={fmt:"mix",topic:"all",len:10,mode:"practice"};
+function resolveOpts(){
+  var o=Object.assign({},sel);
+  if(sel.len==="custom"){var v=parseInt($("#customn").value,10);if(!(v>=1))v=10;o.len=Math.min(v,200);}
+  return o;
+}
 function renderChips(){
   [["#fmts",FMTS,"fmt"],["#topics",TOPICS,"topic"],["#lens",LENS,"len"],["#modes",MODES,"mode"]].forEach(function(cfg){
     var box=$(cfg[0]);box.replaceChildren();
@@ -638,6 +655,7 @@ function renderChips(){
       box.append(h("button",{class:"chip","aria-pressed":String(sel[cfg[2]]===o[0]),onclick:function(){sel[cfg[2]]=o[0];renderChips();}},o[1]));
     });
   });
+  $("#customwrap").classList.toggle("hidden",sel.len!=="custom");
 }
 
 /* ================= quiz engine ================= */
@@ -670,7 +688,7 @@ $("#start").addEventListener("click",function(){
   if((sel.fmt==="situation"||sel.fmt==="rewrite")&&(sel.topic===0||sel.topic===1)){
     alert("Situations and Rewrite only cover the Second and Third conditional. Pick another conditional or another exercise type.");return;
   }
-  startQuiz(sel);
+  startQuiz(resolveOpts());
 });
 function goHome(){
   $("#quiz").classList.add("hidden");$("#end").classList.add("hidden");$("#home").classList.remove("hidden");
@@ -832,8 +850,113 @@ function itemQuestionText(it){
   if(it.kind==="gap") return it.q;
   if(it.kind==="type") return "“"+it.q+"”";
   if(it.kind==="situation"||it.kind==="rewrite") return it.sit;
-  return "Which sentence is correct?";
+  return "";
 }
+/* ---------- report (PDF) ---------- */
+function gradeInfo(){
+  var n=S.results.length,sc=S.score;
+  return {n:n,sc:sc,pct:Math.round(100*sc/n),grade:(Math.round(sc/n*100)/10).toFixed(1)};
+}
+function lbl(list,v){for(var i=0;i<list.length;i++)if(list[i][0]===v)return list[i][1];return String(v);}
+function clean(s){
+  return String(s).replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/…/g,"...").replace(/[^\x20-\x7E -ÿ]/g,"?");
+}
+function reportMeta(name){
+  var tp=S.topic==="all"?"All conditionals":S.topic==="weak"?"My weakest conditional":lbl(TOPICS,S.topic)+" conditional";
+  return {name:name,date:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}),
+          mode:S.exam?"Exam":"Practice",fmt:lbl(FMTS,S.fmt),topic:tp};
+}
+function reportRows(){
+  return S.results.map(function(x,i){
+    var it=x.item;
+    return {n:i+1,ok:x.ok,head:HEAD[it.kind],q:itemQuestionText(it),user:x.user||"(blank)",correct:it.ansText,why:it.why};
+  });
+}
+function reportCard(){
+  var nameIn=h("input",{type:"text",class:"wide",placeholder:"Name (optional)",maxlength:"40","aria-label":"Name for the report"});
+  try{nameIn.value=localStorage.getItem("conditionals_name")||"";}catch(e){}
+  return h("div",{class:"card"},
+    h("h3",{style:"margin-top:0"},"Save your results"),
+    h("p",{class:"muted",style:"margin-top:0"},"Download a PDF with your score, your grade out of 10 and every question with your answer."),
+    nameIn,
+    h("div",{class:"row"},h("button",{class:"btn",onclick:function(){
+      var nm=nameIn.value.trim();
+      try{localStorage.setItem("conditionals_name",nm);}catch(e){}
+      buildPdf(nm);
+    }},"⬇️ Download PDF")));
+}
+function buildPdf(name){
+  var lib=window.jspdf&&window.jspdf.jsPDF;
+  if(!lib){printReport(name);return;}
+  var g=gradeInfo(),m=reportMeta(name),rows=reportRows();
+  var doc=new lib({unit:"mm",format:"a4"}),M=16,W=210,Hh=297,maxW=W-2*M,y=M;
+  function line(str,size,style,color,indent){
+    doc.setFont("helvetica",style||"normal");doc.setFontSize(size);
+    doc.setTextColor.apply(doc,color||[28,34,48]);
+    var lh=size*0.3528*1.3,x=M+(indent||0);
+    doc.splitTextToSize(clean(str),maxW-(indent||0)).forEach(function(l){
+      if(y+lh>Hh-M){doc.addPage();y=M;}
+      doc.text(l,x,y+lh*0.8);y+=lh;
+    });
+  }
+  var GREEN=[21,128,61],RED=[185,28,28],GREY=[91,100,117];
+  line("If... Conditionals - Results",20,"bold",[67,56,202]);
+  y+=1;
+  line([m.name,m.date].filter(Boolean).join("   |   "),11,"normal",GREY);
+  line(m.mode+" mode   |   "+m.fmt+"   |   "+m.topic,10,"normal",GREY);
+  y+=4;
+  line("Score: "+g.sc+" / "+g.n+"   ("+g.pct+"%)",18,"bold");
+  line("Grade: "+g.grade+" / 10",14,"bold",g.pct>=60?GREEN:RED);
+  y+=2;
+  [0,1,2,3].forEach(function(t){
+    var r=S.results.filter(function(x){return x.item.t===t;});
+    if(!r.length)return;
+    line(TNAME[t]+" conditional: "+r.filter(function(x){return x.ok;}).length+" of "+r.length,10,"normal",GREY);
+  });
+  y+=3;
+  doc.setDrawColor(200,200,200);doc.line(M,y,W-M,y);y+=4;
+  line("Your answers",14,"bold");
+  y+=2;
+  rows.forEach(function(r){
+    line(r.n+".  "+(r.ok?"CORRECT":"INCORRECT")+"  -  "+r.head,10,"bold",r.ok?GREEN:RED);
+    if(r.q)line(r.q,10);
+    line("Your answer: "+r.user,10,"normal",[28,34,48],4);
+    if(!r.ok){
+      line("Correct answer: "+r.correct,10,"bold",GREEN,4);
+      line("Why: "+r.why,9,"normal",GREY,4);
+    }
+    y+=2.5;
+  });
+  var pages=doc.getNumberOfPages();
+  for(var p=1;p<=pages;p++){
+    doc.setPage(p);doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(140,140,140);
+    doc.text("Page "+p+" of "+pages,W-M,Hh-8,{align:"right"});
+  }
+  doc.save("conditionals-results-"+new Date().toISOString().slice(0,10)+".pdf");
+}
+/* fallback if the PDF library could not load: print dialog (choose "Save as PDF") */
+function printReport(name){
+  var g=gradeInfo(),m=reportMeta(name),rows=reportRows();
+  var box=document.getElementById("printReport");
+  if(!box){box=h("div",{id:"printReport"});document.body.append(box);}
+  var kids=[
+    h("h1",{},"If... Conditionals - Results"),
+    h("p",{},[m.name,m.date,m.mode+" mode",m.fmt,m.topic].filter(Boolean).join("  |  ")),
+    h("h2",{},"Score: "+g.sc+" / "+g.n+" ("+g.pct+"%)  -  Grade: "+g.grade+" / 10")
+  ].concat(rows.map(function(r){
+    return h("div",{style:"margin:8px 0;page-break-inside:avoid"},
+      h("p",{class:r.ok?"ok":"no"},h("b",{},r.n+". "+(r.ok?"CORRECT":"INCORRECT")+" - "+r.head)),
+      r.q?h("p",{},r.q):null,
+      h("p",{},"Your answer: "+r.user),
+      r.ok?null:h("p",{class:"ok"},h("b",{},"Correct answer: "+r.correct)),
+      r.ok?null:h("p",{},"Why: "+r.why));
+  }));
+  box.replaceChildren.apply(box,kids);
+  document.body.classList.add("printing");
+  window.print();
+  document.body.classList.remove("printing");
+}
+
 function showEnd(){
   $("#quiz").classList.add("hidden");
   var end=$("#end");end.classList.remove("hidden");end.replaceChildren();
@@ -852,7 +975,7 @@ function showEnd(){
     var it=x.item;
     return h("div",{class:"review"},
       h("p",{},h("span",{class:"pill p"+it.t},TNAME[it.t])," ",h("b",{},HEAD[it.kind])),
-      h("p",{},itemQuestionText(it)),
+      itemQuestionText(it)?h("p",{},itemQuestionText(it)):null,
       h("p",{class:"bad"},"Your answer: "+(x.user||"(blank)")),
       h("p",{class:"good"},"Correct answer: "+it.ansText),
       h("p",{class:"muted"},it.why));
@@ -865,10 +988,11 @@ function showEnd(){
       failed.length?h("button",{class:"btn",onclick:function(){
         startQuiz({fmt:S.fmt,topic:S.topic,mode:S.exam?"exam":"practice",len:failed.length,items:shuffle(failed.map(function(x){return x.item;}))});
       }},"Retry my mistakes ("+failed.length+")"):null,
-      h("button",{class:"btn "+(failed.length?"ghost":""),onclick:function(){startQuiz(sel);}},"New round"),
+      h("button",{class:"btn "+(failed.length?"ghost":""),onclick:function(){startQuiz(resolveOpts());}},"New round"),
       h("button",{class:"btn ghost",onclick:goHome},"Menu"),
       h("button",{class:"btn ghost",onclick:function(){showTab("guide");}},"📖 Guide")));
   end.append(card);
+  end.append(reportCard());
   if(rev.length) end.append(h("div",{class:"card"},h("h3",{style:"margin-top:0"},"Review your mistakes"),rev));
   window.scrollTo({top:0});
 }
